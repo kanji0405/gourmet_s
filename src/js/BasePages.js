@@ -3,12 +3,6 @@ import {ApiManager, XmlManager} from './Managers.js';
 import {SearchRangeInput, SearchResult} from './SearchComponents.js';
 import Strings from './../json/Strings.json';
 
-/*
-cd C:\Program Files (x86)\Google\Chrome\Application
-chrome.exe --disable-web-security --user-data-dir="C://Chrome dev session"
-http://localhost:3000/
-*/
-
 //====================================================================================
 // class MainApp
 //====================================================================================
