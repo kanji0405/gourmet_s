@@ -1,13 +1,88 @@
+@import url('https://css.gg/search.css');
+@import url('https://css.gg/check.css');
+@import url('https://css.gg/close.css');
+@import url('https://css.gg/close-o.css');
+@import url('https://css.gg/read.css');
+
 :root{
-    --backcolor: orange;
+    --main-backcolor: orange;
+    --menu-backcolor: #f0f0f0;
+    --item-backcolor: white;
+    --item-selected-backcolor: bisque;
+    --text-normal-color: #4a3103;
+    --text-accent-color: white;
+    --positive-color: lightgreen;
+    --negative-color: red;
+    --question-color: blue;
+}
+
+input[type="text"], input[type="button"], select{
+    border: 1px solid var(--text-normal-color);
+    color: var(--text-normal-color);
+}
+
+input[type="button"]{
+    background-color: var(--main-backcolor);
+    display: block;
+    margin: 4px auto;
+    transition: 100ms;
+    -moz-transition: 100ms;
+    -webkit-transition: 100ms;
+}
+input[type="button"]:active{
+    background-color: var(--item-selected-backcolor);
+    color: var(--text-normal-color)
+}
+
+div.logo-gg-wrapper{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-direction: row;
+    box-sizing: border-box;
+    width: 40px;
+    height: 40px;
+}
+div.logo-gg-wrapper .gg-search{
+    --ggs: 1.5;
+    color:var(--text-accent-color);
+    left: 4px;
+    top: -2px;
+    border-width: 3px;
+}
+div.logo-gg-wrapper + h1{
+    display: inline-flex;
+}
+.gg-wrapper{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-direction: row;
+    box-sizing: border-box;
+    width: 40px;
+    height: 40px;
+}
+.gg-wrapper i{ --ggs: 3 }
+i.gg-check{ color: var(--positive-color) }
+i.gg-close{ color: var(--negative-color) }
+i.gg-read{ --ggs: 1.25; color: var(--question-color) }
+i.gg-close-o{
+    --ggs: 1;
+    display: inline-block;
+    margin: 3px;
+    position: relative;
+    top: 6px;
 }
 
 body{
-    background-color: var(--backcolor);
+    background-color: var(--main-backcolor);
+    color: var(--text-normal-color)
 }
 
 header{
-    background-color: var(--backcolor);
+    background-color: var(--main-backcolor);
     position: fixed;
     z-index: 5000;
     top: 0;
@@ -16,7 +91,7 @@ header{
 }
 
 h1{
-    color: white;
+    color: var(--text-accent-color);
     margin: 5px 0;
     padding: 0;
     padding-left: 4px;
@@ -24,38 +99,79 @@ h1{
 }
 
 div.App{
-    background-color: #fefefe;
+    background-color: var(--menu-backcolor);
     padding: 10px 10px;
     margin: 0
 }
 
 footer{
     text-align: center;
+    color: var(--text-accent-color)
+}
+
+footer img{
+    display: inline;
+    margin-bottom: 10px;
 }
 
 div#YahooMapWrapper{
     margin: 0;
-    margin-top: calc(20pt + 50px);
+    margin-top: calc(20pt + 20px);
     width: 100% !important;
     height: 480px !important;
 }
 
 div#searchInputArea{
-    background-color: bisque;
+    background-color: var(--item-selected-backcolor);
+    box-sizing: unset;
+    padding: 10px
 }
+
+div#searchInputArea div{
+    box-sizing: unset;
+}
+
+div#searchInputArea ul{
+    list-style: none;
+    padding: 0;
+}
+div#searchInputArea li{
+    float: left;
+}
+
+div#searchInputArea li select{
+    margin-right: 10px;
+}
+div#searchInputArea label{
+    word-break: keep-all;
+    display: inline-block;
+    padding: 3px 3px
+}
+/*
 div#searchResultArea{
+}
+*/
+
+.current-shop{
+    background-color: var(--menu-selected-backcolor);
+}
+
+.shop-list{
+    background-color: var(--item-backcolor);
 }
 
 .shop-list tr{
     border-collapse: collapse;
 }
 .shop-list td{
-    border: 1px solid var(--backcolor);
+    border: 1px solid var(--main-backcolor);
     margin: 0;
 }
 
 .shop-logo img{
+    max-width: 144px;
     width: 128px;
+    min-width: 96px;
     height: auto;
     cursor: pointer;
 }
@@ -72,18 +188,12 @@ div#searchResultArea{
     font-weight: bold;
 }
 .shop-info .shop-name{
-    background-color: var(--backcolor);
+    background-color: var(--main-backcolor);
     text-decoration: underline;
     cursor: pointer;
-    color: white;
+    color: var(--text-accent-color);
     font-size: large;
     font-weight: bold;
-}
-
-@media screen and (max-width: 480px){
-    div#YahooMapWrapper{
-        height: 300px !important;
-    }
 }
 
 .shop-paging{
@@ -92,7 +202,7 @@ div#searchResultArea{
 }
 
 .shop-paging p{
-    color: var(--backcolor);
+    color: var(--main-backcolor);
     text-align: center;
     display: inline-block;
     margin: 4px 5px;
@@ -101,7 +211,84 @@ div#searchResultArea{
     cursor: pointer;
 }
 p.shop-current-page, p.shop-page-disable{
-    color:black;
+    color:var(--text-normal-color);
     text-decoration: unset;
     cursor: unset;
+}
+
+table.shop-main-info{
+    width: 100%;
+}
+table.shop-main-info img{
+    max-width: 144px;
+    min-width: 96px;
+    height: auto;
+}
+
+table.shop-main-info h2,
+table.shop-main-info h3,
+table.shop-main-info p{
+    margin: 4px 0;
+}
+
+th.info-header{
+    text-align: left;
+    font-weight: unset;
+}
+th.info-header p,
+th.info-header h2{
+    margin: 0;
+}
+
+
+table.shop-main-info td,
+table.shop-sub-info td{
+    text-align: left;
+    background-color: var(--item-selected-backcolor);
+    vertical-align: top;
+}
+
+table.shop-sub-info td{
+    width:100%;
+}
+
+article.shop-article{
+    background-color: var(--main-backcolor);
+    padding: 6px 12px;
+    border-radius: 12px;
+}
+
+article.shop-article .clickable{
+    text-decoration: underline;
+    color: var(--text-accent-color);
+    cursor: pointer;
+}
+article.shop-article .close-button{
+    text-align: center;
+}
+
+table.shop-sub-info{
+    width: 100%;
+}
+
+table.shop-sub-info th{
+    width:30%;
+}
+table.shop-sub-info h3{
+    margin: 4px 0;
+}
+
+table.shop-sub-info p{
+    display: inline-flex;
+    margin: 0;
+    vertical-align: top;
+}
+
+@media screen and (max-width: 480px){
+    div#YahooMapWrapper{
+        height: 300px !important;
+    }
+    div#searchInputArea{
+        padding: 3px
+    }
 }

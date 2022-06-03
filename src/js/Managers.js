@@ -43,7 +43,7 @@ export class ApiManager{
 	static async getAPI(category, version, query) {
 		return new Promise((resolve, reject) => {
 			try {
-				const url = this.parseUrl(category, version, query).href
+				const url = this.parseUrl(category, version, query).href;
 				fetch(url, {
 					method: 'POST',
 					mode: 'cors',
@@ -66,22 +66,18 @@ export class ApiManager{
 			}
 		});
 	}
-};
+}
 
 //====================================================================================
 // static XmlManager
 //====================================================================================
 // - XMLテキストをDOM形式にパース、XML内のオブジェクト
-// 　検索などを行います。
+//   検索などを行います。
 //====================================================================================
 export class XmlManager{
 	static parseXml(obj){
 		const parser = new DOMParser();
-		try{
-			return parser.parseFromString(obj, "text/xml");
-		}catch(e){
-			throw e;
-		}
+		return parser.parseFromString(obj, "text/xml");
 	}
     static getElementsByTagName(xml, name){
         return Array.from(xml.getElementsByTagName(name));

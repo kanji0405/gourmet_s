@@ -8,24 +8,49 @@ import Strings from './../json/Strings.json';
 // - 検索範囲の入力フォームをレンダリングします
 //====================================================================================
 export const SearchRangeInput = (props) => {
-	const [val, setValue] = useState('3');
-	const onChange = (e) => setValue(() => e.target.value);
+	const [selVal, setSelectValue] = useState('3');
+	const [wordVal, setWordValue] = useState('');
+	const bools = Object.keys(Strings.searchByBools).map((key, i)=>{
+		const [val, setValue] = useState(false);
+		const name = Strings.searchByBools[key];
+		const labelKey = "bool-"+i;
+		return (
+			<label name={key} key={labelKey}>
+				<input type="checkbox" defaultChecked={val} onChange={
+					e => setValue(()=>e.target.checked !== true)
+				}/>
+				{name}
+			</label>
+		);
+	});
 	return (
 		<div>
-			{Strings.searchByRange}
-			<select value={val} onChange={onChange}>
-				<option value="1">{Strings.searchRanges[0]}</option>
-				<option value="2">{Strings.searchRanges[1]}</option>
-				<option value="3">{Strings.searchRanges[2]}</option>
-				<option value="4">{Strings.searchRanges[3]}</option>
-				<option value="5">{Strings.searchRanges[4]}</option>
-			</select>
+			<ul>
+				<li>
+					{Strings.searchByRange}
+					<select value={selVal} onChange={e => setSelectValue(() => e.target.value)}>
+						<option value="1">{Strings.searchRanges[0]}</option>
+						<option value="2">{Strings.searchRanges[1]}</option>
+						<option value="3">{Strings.searchRanges[2]}</option>
+						<option value="4">{Strings.searchRanges[3]}</option>
+						<option value="5">{Strings.searchRanges[4]}</option>
+					</select>
+				</li>
+				<li>
+					{Strings.searchByKeyword}
+					<input type="text" value={wordVal} onChange={e => setWordValue(() => e.target.value)} />
+				</li>
+			</ul>
+			<br style={{clear: "left"}}/>
+			{bools}
 			<input type="button" value={Strings.searchSubmit} onClick={
-				props.onButtonClick.bind(props.parent, val)
+				props.onButtonClick.bind(
+					props.parent, selVal, wordVal, bools
+				)
 			}/>
 		</div>
 	);
-}
+};
 
 
 //====================================================================================
@@ -35,14 +60,14 @@ export const SearchRangeInput = (props) => {
 //====================================================================================
 export class SearchResult extends React.Component{
 	constructor(props){
-		super(props)
+		super(props);
 		this.page = 0;
 	}
 	knsMaxItem(){ return 5; }
 	render(){
 		const result = this.props.result;
 		if (result.length === 0){
-			return <div></div>
+			return <div></div>;
 		}else{
 			if (this.props.isResultChanged === true){
 				this.knsSetPage(0, false);
@@ -54,6 +79,7 @@ export class SearchResult extends React.Component{
 			);
 			const startItem = curPage * maxItem;
 			const endItem = (curPage + 1) * maxItem;
+			const currentShop = this.props.currentShop;
 			return (<div>
 				{this.knsRenderSearchResultPaging(curPage, maxPage)}
 				{
@@ -63,6 +89,7 @@ export class SearchResult extends React.Component{
 							<SearchedShop
 								key={"shop"+i}
 								xml={xml}
+								currentShop={currentShop}
 								parent={this.props.parent}
 								onShopClick={this.props.onShopClick}>
 							</SearchedShop>
@@ -134,21 +161,22 @@ class SearchResultPaging extends React.Component{
 // - 店情報単体のレンダリングを行うクラスです
 //====================================================================================
 class SearchedShop extends React.Component{
-	getText(xml, name){
+	knsGetText(xml, name){
 		const element = XmlManager.getElementByTagName(xml, name);
 		return element ? element.textContent : null;
 	}
 	render(){
 		const xml = this.props.xml;
-		const thumb = this.getText(xml, 'logo_image');
+		const thumb = this.knsGetText(xml, 'logo_image');
 		const onClick = this.props.onShopClick.bind(
 			this.props.parent,
 			xml,
-			this.getText(xml, 'lat'),
-			this.getText(xml, 'lng')
+			this.knsGetText(xml, 'lat'),
+			this.knsGetText(xml, 'lng')
 		);
 		return (
-		<table className='shop-list'>
+		<table className={
+			'shop-list ' + (xml === this.props.currentShop ? 'current-shop' : '')}>
 			<tbody>
 				<tr>
 					<td className='shop-logo'>{
@@ -158,11 +186,11 @@ class SearchedShop extends React.Component{
 					}</td>
 					<td className='shop-info'>
 						<p className='shop-name' onClick={onClick}>
-							{this.getText(xml, 'name') || Strings.shopNoInfo}
+							{this.knsGetText(xml, 'name') || Strings.shopNoInfo}
 						</p>
-						<p>{this.getText(xml, 'catch') || Strings.shopNoInfo}</p>
+						<p>{this.knsGetText(xml, 'catch') || Strings.shopNoInfo}</p>
 						<p><span>{Strings.shopAccess}</span><br />{
-						this.getText(xml, 'mobile_access') || Strings.shopNoInfo
+						this.knsGetText(xml, 'mobile_access') || Strings.shopNoInfo
 						}</p>
 					</td>
 				</tr>
