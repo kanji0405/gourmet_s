@@ -6,7 +6,7 @@
 import apiKey from './../json/api-key.json';
 
 export class ApiManager{
-	static BASE_URL = "http://webservice.recruit.co.jp/";
+	static BASE_URL = "https://webservice.recruit.co.jp/";
 	static CATE_GOURMET = 'gourmet';
 	static CATE_SHOP = 'shop';
 	static CATE_BUDGET = 'budget';
