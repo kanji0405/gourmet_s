@@ -3,9 +3,9 @@
 //====================================================================================
 // - APIを叩く静的クラスです
 //====================================================================================
-import apiKey from './api-key.json';
+import apiKey from './../json/api-key.json';
 
-export default class ApiManager{
+export class ApiManager{
 	static BASE_URL = "http://webservice.recruit.co.jp/";
 	static CATE_GOURMET = 'gourmet';
 	static CATE_SHOP = 'shop';
@@ -31,7 +31,7 @@ export default class ApiManager{
 	}
 	static parseQuery(obj){
 		if (typeof obj !== 'object') obj = {};
-		obj["key"] = apiKey;
+		obj["key"] = apiKey.HotPepper;
 		let str = "?";
 		const keys = Object.keys(obj);
 		keys.forEach((key, i) => {
@@ -67,3 +67,32 @@ export default class ApiManager{
 		});
 	}
 };
+
+//====================================================================================
+// static XmlManager
+//====================================================================================
+// - XMLテキストをDOM形式にパース、XML内のオブジェクト
+// 　検索などを行います。
+//====================================================================================
+export class XmlManager{
+	static parseXml(obj){
+		const parser = new DOMParser();
+		try{
+			return parser.parseFromString(obj, "text/xml");
+		}catch(e){
+			throw e;
+		}
+	}
+    static getElementsByTagName(xml, name){
+        return Array.from(xml.getElementsByTagName(name));
+    }
+    static getElementByTagName(xml, name){
+        return this.getElementsByTagName(xml, name)[0];
+    }
+    static querySelectorAll(xml, cond){
+        return Array.from(xml.querySelectorAll(cond));
+    }
+    static querySelector(xml, cond){
+        return Array.from(xml.querySelector(cond));
+    }
+}
