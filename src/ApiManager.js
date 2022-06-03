@@ -66,12 +66,4 @@ export default class ApiManager{
 			}
 		});
 	}
-	static parseXml(obj){
-		const parser = new DOMParser();
-		try{
-			return parser.parseFromString(obj, "text/xml");
-		}catch(e){
-			return obj;
-		}
-	}
 };

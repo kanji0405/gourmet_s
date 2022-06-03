@@ -1,0 +1,102 @@
+:root{
+    --backcolor: orange;
+}
+
+body{
+    background-color: var(--backcolor);
+}
+
+header{
+    background-color: var(--backcolor);
+    position: fixed;
+    z-index: 5000;
+    top: 0;
+    left: 0;
+    width:100%;
+}
+h1{
+    color: white;
+    margin: 5px 0;
+    padding: 0;
+    padding-left: 4px;
+    font-size: 20pt;
+}
+
+main{
+    background-color: #fefefe;
+}
+
+footer{
+    text-align: center;
+}
+
+div#YahooMapWrapper{
+    margin-top: calc(20pt + 20px);
+    width: 100% !important;
+}
+
+div#searchInputArea{
+    background-color: bisque;
+}
+div#searchResultArea{
+}
+
+.shop-list tr{
+    border-collapse: collapse;
+}
+.shop-list td{
+    border: 1px solid var(--backcolor);
+    margin: 0;
+}
+
+.shop-logo img{
+    width: 128px;
+    height: auto;
+    cursor: pointer;
+}
+.shop-info{
+    vertical-align: top;
+    width: 100%
+}
+.shop-info p{
+    margin: 0;
+    padding: 0;
+    padding-left: 6px;
+}
+.shop-info span{
+    font-weight: bold;
+}
+.shop-info .shop-name{
+    background-color: var(--backcolor);
+    text-decoration: underline;
+    cursor: pointer;
+    color: white;
+    font-size: large;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 480px){
+    div#YahooMapWrapper{
+        height: 300px !important;
+    }
+}
+
+.shop-paging{
+    margin: 0 auto;
+    text-align: center;
+}
+
+.shop-paging p{
+    color: var(--backcolor);
+    text-align: center;
+    display: inline-block;
+    margin: 4px 5px;
+    padding: 0;
+    text-decoration: underline;
+    cursor: pointer;
+}
+p.shop-current-page, p.shop-page-disable{
+    color:black;
+    text-decoration: unset;
+    cursor: unset;
+}

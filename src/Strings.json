@@ -1,0 +1,22 @@
+{
+    "fmtNum": "%d",
+    "searchByRange": "検索範囲：",
+    "searchRanges": [
+        "300m",
+        "500m",
+        "1000m",
+        "2000m",
+        "3000m"
+    ],
+    "searchSubmit": "検索",
+    "previousPage": "＜前のページへ",
+    "nextPage": "次のページへ＞",
+    "currentPage": "ページ%d",
+    "shopNoInfo": "情報なし",
+    "shopAccess": "【アクセス】",
+    "shopInfoClose": "閉じる",
+    "mainGpsFailed": "位置情報の取得に失敗しました",
+    "mainLoading": "読み込み中",
+    "mainSearchNoHit": "他の条件で探してみましょう。",
+    "mainSearchSomeHit": "%d件ヒットしました！"
+}
