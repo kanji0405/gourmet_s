@@ -6,7 +6,7 @@
 import apiKey from './../json/api-key.json';
 
 export class ApiManager{
-	static BASE_URL = "https://webservice.recruit.co.jp/";
+	static BASE_URL = "https://webservice.recruit.co.jp:443/";
 	static CATE_GOURMET = 'gourmet';
 	static CATE_SHOP = 'shop';
 	static CATE_BUDGET = 'budget';
@@ -45,9 +45,10 @@ export class ApiManager{
 			try {
 				const url = this.parseUrl(category, version, query).href;
 				fetch(url, {
-					method: 'POST',
+					method: 'GET',
 					mode: 'cors',
 					headers: {
+						'Accept': 'application/xml',
 						'Content-Type': 'application/xml',
 						'Access-Control-Allow-Origin': this.BASE_URL
 					},
@@ -77,7 +78,7 @@ export class ApiManager{
 export class XmlManager{
 	static parseXml(obj){
 		const parser = new DOMParser();
-		return parser.parseFromString(obj, "text/xml");
+		return parser.parseFromString(obj, "application/xml");
 	}
     static getElementsByTagName(xml, name){
         return Array.from(xml.getElementsByTagName(name));

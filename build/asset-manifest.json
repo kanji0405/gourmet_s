@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/gourmet_s/build/static/css/main.be5e396b.css",
-    "main.js": "/gourmet_s/build/static/js/main.a2436d16.js",
+    "main.js": "/gourmet_s/build/static/js/main.f6ae8beb.js",
     "static/js/787.21017d87.chunk.js": "/gourmet_s/build/static/js/787.21017d87.chunk.js",
     "index.html": "/gourmet_s/build/index.html",
     "main.be5e396b.css.map": "/gourmet_s/build/static/css/main.be5e396b.css.map",
-    "main.a2436d16.js.map": "/gourmet_s/build/static/js/main.a2436d16.js.map",
+    "main.f6ae8beb.js.map": "/gourmet_s/build/static/js/main.f6ae8beb.js.map",
     "787.21017d87.chunk.js.map": "/gourmet_s/build/static/js/787.21017d87.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.be5e396b.css",
-    "static/js/main.a2436d16.js"
+    "static/js/main.f6ae8beb.js"
   ]
 }
